@@ -1,15 +1,14 @@
 import './App.css';
 import { Label, Note } from "./types"; // Import the Label type from the appropriate module
 import { dummyNotesList } from "./constants"; // Import the dummyNotesList from the appropriate module
-import { ClickCounter } from "./hooksExercise";
-import {ToggleTheme} from "./toggleTheme";
 import { NoteFavorite } from './favoriteNote';
-import { TitleFavorite } from './titleFavorite';
 import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
 import { ThemeContext, themes } from "./ThemeContext";
+import { ToggleTheme } from './toggleTheme';
 
 function App() {
-  const theme = useContext(ThemeContext);
+  const theme = themes.dark;
+
   const [titles, setTitle] = useState<string[]>([]);
   const noteTitles = dummyNotesList.map(note => note.title);
 
@@ -40,14 +39,21 @@ const createNoteHandler = (event: React.FormEvent) => {
    setCreateNote(initialNote);
  };
 
+ const deleteNote = (removedNotes:any) => {
+  const noteList = notes.filter(notes=> notes != removedNotes);
+  setNotes(noteList);
+ };
+
  const [selectedNote, setSelectedNote] = useState<Note>(initialNote);
 
 
  return (
   <ThemeContext.Provider value={theme}>
    <div className='app-container'>
+    
     <form className="note-form">
-       <div><input placeholder="Note Title"
+       <div><input 
+     placeholder="Note Title"
         	onChange={(event) =>
           	setCreateNote({ ...createNote, title: event.target.value })}
         	required>
@@ -59,8 +65,7 @@ const createNoteHandler = (event: React.FormEvent) => {
         </textarea></div>
 
        <div>
-     	<select
-       	onChange={(event) =>
+     	<select onChange={(event) =>
          	setCreateNote({ ...createNote, label: event.target.value as Label})}
        	required>
         <option value={Label.other}>Other</option>
@@ -71,13 +76,12 @@ const createNoteHandler = (event: React.FormEvent) => {
    	</div>
 
 
-       <div><button type="submit" onClick={createNoteHandler}>Create</button></div>
-
+       <div ><button type="submit" onClick={createNoteHandler}>Create</button></div>
 
 </form>
      <div className="notes-grid">
        {notes.map((note) => (
-         <div
+         <div 
            key={note.id}
            className="note-item">
            <div className="notes-header">
@@ -86,10 +90,10 @@ const createNoteHandler = (event: React.FormEvent) => {
             addFav = {addFavorite}
             removeFav = {removeFavorite}
             />
-             <button>x </button>
+             <button onClick={()=>deleteNote(note)}>x </button>
            </div>
            <h2> {note.title} </h2>
-           <p> {note.content} </p>
+           <p > {note.content} </p>
            <p> {note.label} </p>
          </div>
        ))}
@@ -97,14 +101,12 @@ const createNoteHandler = (event: React.FormEvent) => {
 
      <div style={{ display: 'flex', flexDirection: 'column' }}>
 
-      <h2> List of favorites:</h2>
+      <h2 > List of favorites:</h2>
       {titles.map((item, index) => (
         <div key={index}>{item}</div>
       ))}
     </div>
           <ToggleTheme/>
-
-
    </div>
        
   </ThemeContext.Provider>
@@ -112,4 +114,3 @@ const createNoteHandler = (event: React.FormEvent) => {
 }
 
 export default App;
-
