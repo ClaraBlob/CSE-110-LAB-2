@@ -42,6 +42,7 @@ const createNoteHandler = (event: React.FormEvent) => {
  const deleteNote = (removedNotes:any) => {
   const noteList = notes.filter(notes=> notes != removedNotes);
   setNotes(noteList);
+  removeFavorite(removedNotes.title);
  };
 
  const [selectedNote, setSelectedNote] = useState<Note>(initialNote);
@@ -92,9 +93,9 @@ const createNoteHandler = (event: React.FormEvent) => {
             />
              <button onClick={()=>deleteNote(note)}>x </button>
            </div>
-           <h2> {note.title} </h2>
-           <p > {note.content} </p>
-           <p> {note.label} </p>
+           <h2 contentEditable="true"> {note.title} </h2>
+           <p contentEditable="true"> {note.content} </p>
+           <p contentEditable="true">{note.label} </p>
          </div>
        ))}
      </div>
