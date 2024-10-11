@@ -21,6 +21,12 @@ function App() {
     setTitle(newTitles);
   };
 
+  const updateFavorite = (id: any) =>{
+    const favTitle = notes[id].title;
+    const notesIndex = titles.findIndex(titles=> titles === favTitle);
+    titles[notesIndex] = notes[id].title;
+  };
+
 const [notes, setNotes] = useState(dummyNotesList); 
 const initialNote = {
    id: -1,
@@ -46,7 +52,22 @@ const createNoteHandler = (event: React.FormEvent) => {
  };
 
  const [selectedNote, setSelectedNote] = useState<Note>(initialNote);
-
+ 
+ const updateNote = (newTitle:any,newContent:string,newLabel:any,
+    id:any) => {
+    selectedNote.title = newTitle;
+    selectedNote.content = newContent;
+    selectedNote.label = newLabel;
+    selectedNote.id = id;
+    const notesIndex = notes.findIndex(note => note.id === id );
+    if(titles.includes(notes[notesIndex].title)){
+      updateFavorite(id);
+    };
+    notes[notesIndex].title = selectedNote.title;
+    console.log("index: ", notesIndex);
+     console.log("title: ", newTitle);
+  console.log("title: ", notes[notesIndex].title);
+  };
 
  return (
   <ThemeContext.Provider value={theme}>
@@ -91,9 +112,11 @@ const createNoteHandler = (event: React.FormEvent) => {
             addFav = {addFavorite}
             removeFav = {removeFavorite}
             />
+            
              <button onClick={()=>deleteNote(note)}>x </button>
            </div>
-           <h2 contentEditable="true"> {note.title} </h2>
+           <h2 id = "title" contentEditable="true" 
+           onInput={()=>updateNote(note.title,note.content,note.label,note.id)}> {note.title} </h2>
            <p contentEditable="true"> {note.content} </p>
            <p contentEditable="true">{note.label} </p>
          </div>
