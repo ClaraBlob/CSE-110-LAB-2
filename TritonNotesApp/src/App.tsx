@@ -104,12 +104,8 @@ const createNoteHandler = (event: React.FormEvent) => {
         background: currentTheme.background,
         color: currentTheme.foreground,
       }} className='app-container'>
-          {/*style theme for toggling*/}
-    <form 
-        style={{
-          background: currentTheme.background,
-          color: currentTheme.foreground,
-        }} className="note-form">
+ 
+    <form className="note-form">
 
       {/*style theme for toggling*/}
        <div><input
@@ -127,6 +123,7 @@ const createNoteHandler = (event: React.FormEvent) => {
         style={{
           background: currentTheme.background,
           color: currentTheme.foreground,
+          borderColor: currentTheme.foreground,
         }} onChange={(event) =>
             setCreateNote({ ...createNote, content: event.target.value })}
         	  required>
@@ -137,6 +134,7 @@ const createNoteHandler = (event: React.FormEvent) => {
         style={{
           background: currentTheme.background,
           color: currentTheme.foreground,
+          borderColor: currentTheme.foreground,
         }} onChange={(event) =>
          	  setCreateNote({ ...createNote, label: event.target.value as Label})}
        	    required>
@@ -148,10 +146,6 @@ const createNoteHandler = (event: React.FormEvent) => {
         
       {/*style theme for toggling*/}
        <div><button 
-       style={{
-          background: currentTheme.background,
-          color: currentTheme.foreground,
-        }}
         type="submit" onClick={createNoteHandler}>
           Create
         </button></div>
