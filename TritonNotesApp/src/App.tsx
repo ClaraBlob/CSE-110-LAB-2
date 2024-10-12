@@ -21,11 +21,11 @@ function App() {
   };
 
   //tried updating favorite updated titles (doesn't work)
-  const updateFavorite = (id: any) =>{
+  /*const updateFavorite = (id: any) =>{
     const favTitle = notes[id].title;
     const notesIndex = titles.findIndex(titles=> titles === favTitle);
     titles[notesIndex] = notes[id].title;
-  };
+  };*/
 
   //toggling themes
   const [currentTheme, setCurrentTheme] = useState(themes.light);
@@ -69,7 +69,7 @@ const createNoteHandler = (event: React.FormEvent) => {
  const [selectedNote, setSelectedNote] = useState<Note>(initialNote);
 
  //tried updating notes (doesn't work)
- const updateNote = (newTitle:any,newContent:string,newLabel:any,
+ /*const updateNote = (newTitle:any,newContent:string,newLabel:any,
     id:any) => {
     selectedNote.title = newTitle;
     selectedNote.content = newContent;
@@ -83,12 +83,12 @@ const createNoteHandler = (event: React.FormEvent) => {
     console.log("index: ", notesIndex);
      console.log("title: ", newTitle);
   console.log("title: ", notes[notesIndex].title);
-  };
+  };*/
 
  return (
   //provides theme context
   <ThemeContext.Provider value={currentTheme}>
-    <div> //toggling theme button
+    <div> 
       <button
       style={{
         background: currentTheme.background,
@@ -99,19 +99,19 @@ const createNoteHandler = (event: React.FormEvent) => {
     </button>
     </div>
 
-    //style theme for toggling
+        {/*style theme for toggling*/}
    <div style={{
         background: currentTheme.background,
         color: currentTheme.foreground,
       }} className='app-container'>
-      //style theme for toggling
+          {/*style theme for toggling*/}
     <form 
         style={{
           background: currentTheme.background,
           color: currentTheme.foreground,
         }} className="note-form">
 
-      //style theme for toggling
+      {/*style theme for toggling*/}
        <div><input
         style={{
           background: currentTheme.background,
@@ -122,7 +122,7 @@ const createNoteHandler = (event: React.FormEvent) => {
         	required>
       </input></div>
 
-      //style theme for toggling
+      {/*style theme for toggling*/}
       <div><textarea 
         style={{
           background: currentTheme.background,
@@ -132,7 +132,7 @@ const createNoteHandler = (event: React.FormEvent) => {
         	  required>
       </textarea></div>
 
-      //style theme for toggling
+      {/*style theme for toggling*/}
        <div><select 
         style={{
           background: currentTheme.background,
@@ -146,7 +146,7 @@ const createNoteHandler = (event: React.FormEvent) => {
        	<option value={Label.work}>Work</option>
      	</select></div>
         
-      //style theme for toggling
+      {/*style theme for toggling*/}
        <div><button 
        style={{
           background: currentTheme.background,
@@ -156,7 +156,7 @@ const createNoteHandler = (event: React.FormEvent) => {
           Create
         </button></div>
         
-//style theme for toggling
+{/*style theme for toggling*/}
 </form>
      <div 
      style={{
@@ -173,34 +173,33 @@ const createNoteHandler = (event: React.FormEvent) => {
            className="note-item">
            <div className="notes-header">
 
-            \\favorite notes prop
+            {/*favorite notes prop*/}
             <NoteFavorite
             message = {note.title}
             addFav = {addFavorite}
             removeFav = {removeFavorite}
             />
 
-            //style theme for toggling
+            {/*style theme for toggling*/}
           <button 
             style={{
               background: currentTheme.background,
               color: currentTheme.foreground,
             }} onClick={()=>deleteNote(note)}>x </button>
     </div>
-    //style theme for toggling
+    {/*style theme for toggling*/}
         <h2 style={{
           background: currentTheme.background,
           color: currentTheme.foreground,
-        }} id = "title" contentEditable="true" 
-        onInput={()=>updateNote(note.title,note.content,note.label,note.id)}> {note.title} </h2>
+        }}  contentEditable="true"> {note.title} </h2>
         
-        //style theme for toggling
+        {/*style theme for toggling*/}
         <p style={{
           background: currentTheme.background,
           color: currentTheme.foreground,
           }} contentEditable="true"> {note.content} </p>
         
-        //style theme for toggling
+        {/*style theme for toggling*/}
         <p style={{
           background: currentTheme.background,
           color: currentTheme.foreground,
@@ -209,15 +208,15 @@ const createNoteHandler = (event: React.FormEvent) => {
   ))}
 </div>
 
-//puts titles in a column
+{/*puts titles in a column*/}
 <div style={{ display: 'flex', flexDirection: 'column' }}>
-//style theme for toggling
+{/*style theme for toggling*/}
   <h2 style={{
     background: currentTheme.background,
     color: currentTheme.foreground,
   }}> List of favorites:
   </h2>
-  \\goes through the list of favorite notes
+  {/*goes through the list of favorite notes*/}
   {titles.map((item, index) => (
     <div key={index}>{item}</div>
   ))}
