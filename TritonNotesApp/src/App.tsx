@@ -172,7 +172,15 @@ const createNoteHandler = (event: React.FormEvent) => {
            key={note.id}
            className="note-item">
            <div className="notes-header">
-
+             {/*stores new values*/}
+            <button
+              onClick={() => setSelectedNote(note)}
+                style={{
+                  background: currentTheme.background,
+                  color: currentTheme.foreground,
+                }}>
+                  Edit
+            </button>
             {/*favorite notes prop*/}
             <NoteFavorite
             message = {note.title}
@@ -191,19 +199,19 @@ const createNoteHandler = (event: React.FormEvent) => {
         <h2 style={{
           background: currentTheme.background,
           color: currentTheme.foreground,
-        }}  contentEditable="true"> {note.title} </h2>
+        }}  contentEditable={note === selectedNote}> {note.title} </h2>
         
         {/*style theme for toggling*/}
         <p style={{
           background: currentTheme.background,
           color: currentTheme.foreground,
-          }} contentEditable="true"> {note.content} </p>
+          }} contentEditable={note === selectedNote}> {note.content} </p>
         
         {/*style theme for toggling*/}
         <p style={{
           background: currentTheme.background,
           color: currentTheme.foreground,
-          }} contentEditable="true">{note.label} </p>
+          }} contentEditable={note === selectedNote}>{note.label} </p>
     </div>
   ))}
 </div>
